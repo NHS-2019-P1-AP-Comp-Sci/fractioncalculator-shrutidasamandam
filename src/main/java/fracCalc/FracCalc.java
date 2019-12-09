@@ -3,10 +3,7 @@
  */
 package fracCalc;
 
-// uses the java.util iterator
 import java.util.*;
-
-import net.sf.saxon.functions.Substring;
 
 public class FracCalc {
 	public static void main(String[] args) {
@@ -44,9 +41,7 @@ public class FracCalc {
 		// finding what the operator is, returns a part of the string which is the
 		// operator
 		String operator = input.substring(firstSpace + 1, lastSpace);
-		/*
-		 * ------------------------- Everything regarding the first fraction of the
-		*/
+		/* ------------------------- Everything regarding the first fraction of user's input*/
 		// declaring the whole number in the first fraction
 		String wholeNumInFraction1;
 		// declaring the numerator of the first fraction
@@ -85,10 +80,7 @@ public class FracCalc {
 			// the denominator of fraction 1 is 1
 			denominatorOfFraction1 = "1";
 		}
-		/*
-		 * ------------------------- Simplifying the first fractions numerator and
-		 * denominator -------------------------
-		 */
+		/* ------------------------- Simplifying the first fractions numerator and denominator ------------------------- */
 		// saying that the simplified numerator of fraction 1 is the value of its whole
 		// number of the first fraction times the value of its denominator plus the
 		// value of its fraction
@@ -108,10 +100,7 @@ public class FracCalc {
 		}
 		// the denominator would still be the same when simplifying
 		int simplifiedDenominatorFraction1 = (Integer.parseInt(denominatorOfFraction1));
-		/*
-		 * ------------------------- Everything regarding the second fraction of the
-		 * input -------------------------
-		 */
+		/* ------------------------- Everything regarding the second fraction of the* input -------------------------*/
 		String secondfraction = input.substring(lastSpace + 1, input.length());
 		// whole number in second fraction
 		String wholeNumInFraction2;
@@ -152,10 +141,7 @@ public class FracCalc {
 			denominatorOfFraction2 = "1";
 		}
 
-		/*
-		 * ------------------------- Simplifying the second fractions numerator and
-		 * denominator -------------------------
-		 */
+		/* ------------------------- Simplifying the second fractions numerator and denominator -------------------------*/
 		// saying that the simplified numerator of fraction 1 is the value of its whole
 		// number of the first fraction times the value of its denominator plus the
 		// value of its fraction
@@ -176,15 +162,12 @@ public class FracCalc {
 		}
 		// denominator would be the same
 		int simplifiedDenominatorFraction2 = (Integer.parseInt(denominatorOfFraction2));
-		/*
-		 * ------------------------- Addition -------------------------
-		 */
+		/*------------------------- Addition -------------------------*/
 		// is called when operation sign is found
 		if (operator.equals("+")) {
 			// if the denominators are not equal to each other
 			if (simplifiedDenominatorFraction1 != simplifiedDenominatorFraction2) {
 				int originalsimplifiedDenominatorFraction1 = simplifiedDenominatorFraction1;
-				int originalsimplifiedNumeratorFraction1 = simplifiedNumeratorFraction1;
 				// then you need to multiply the first fraction denominator by the second
 				// fraction denominator
 				simplifiedDenominatorFraction1 = (simplifiedDenominatorFraction1 * simplifiedDenominatorFraction2);
@@ -213,16 +196,13 @@ public class FracCalc {
 			else
 				finalFraction = Integer.toString(simplifyTotalNumerator / gcd2);
 		}
-		/*
-		 * ------------------------- Subtraction -------------------------
-		 */
+		/* ------------------------- Subtraction -------------------------*/
 		// is called when the operator is a subtraction sign, or else it will not be
 		// called
 		if (operator.equals("-")) {
 			// if the denominators are not equal to each other
 			if (simplifiedDenominatorFraction1 != simplifiedDenominatorFraction2) {
 				int originalsimplifiedDenominatorFraction1 = simplifiedDenominatorFraction1;
-				int originalsimplifiedNumeratorFraction1 = simplifiedNumeratorFraction1;
 				// then you need to multiply the first fraction denominator by the second
 				simplifiedDenominatorFraction1 = (simplifiedDenominatorFraction1 * simplifiedDenominatorFraction2);
 				// then you need to multiply the first fraction numerator by the second fraction
@@ -251,9 +231,9 @@ public class FracCalc {
 					finalFraction = Integer.toString(simplifyTotalNumerator / gcd2);
 			}
 		}
-		/*-------------------------------------- Multiplication --------------------------------------
-		* this statement is called when the operator is a multiplication sign, or else it will not be called
-		*/
+	    /*-------------------------------------- Multiplication --------------------------------------*/
+
+		//this statement is called when the operator is a multiplication sign, or else it will not be called
 		// called only when the multiplication sign is found
 		if (operator.equals("*")) {
 			// if the simplified everything in the fraction is not a 0
@@ -267,7 +247,7 @@ public class FracCalc {
 				int simplifyTotalDenominator = (simplifiedDenominatorFraction1 * simplifiedDenominatorFraction2);
 				// uses gcd
 				int gcd2 = gcd(simplifyTotalNumerator, simplifyTotalDenominator);
-				// if simplifiy total numerator divided by gcd is bigger than 1
+				// if simplify total numerator divided by gcd is bigger than 1
 				if ((simplifyTotalDenominator / gcd2) > 1)
 					// final fraction is the simplified total numerator divided by the gcd and then
 					// a division sign is added and then a simplified total denominator divided by
@@ -281,9 +261,9 @@ public class FracCalc {
 				finalFraction = "0";
 			}
 		}
-		/*-------------------------------------- Division --------------------------------------
-		 * this statement is called when the operator is a division sign, or else it will not be called
-		*/if (operator.equals("/")) {
+		/*-------------------------------------- Division --------------------------------------*/
+		 //this statement is called when the operator is a division sign, or else it will not be called
+		if (operator.equals("/")) {
 			// this is used when the first and second fraction numerator & denominator is
 			// not 0
 			if (simplifiedNumeratorFraction1 != 0 && simplifiedDenominatorFraction1 != 0
@@ -345,21 +325,31 @@ public class FracCalc {
 		return finalFraction;
 
 	}
-
+	/* -------- Used for finding greatest common denominator-------- */
+	// takes in finalFractionNumerator and finalFractionDenominator as input
 	public static int gcd(int finalFractionNumerator, int finalFractionDenominator) {
+		// takes absolute value of the numerator
 		finalFractionNumerator = Math.abs(finalFractionNumerator);
+		// takes absolute value of the denominator
 		finalFractionDenominator = Math.abs(finalFractionDenominator);
+		// returns maximum of numerator and denominator
 		int mod = Math.max(finalFractionNumerator, finalFractionDenominator)
+				// returns minimum of numerator and denominator
+				// takes mod of the max and the min
 				% Math.min(finalFractionNumerator, finalFractionDenominator);
+		// while mod is greater than 0
 		while (mod > 0) {
+			// numerator takes minimum of final numerator and fraction denominator
 			finalFractionNumerator = Math.min(finalFractionNumerator, finalFractionDenominator);
 			finalFractionDenominator = mod;
+			// mod takes the max of the two parameters, and the min of the two parameters, then mod's it 
 			mod = Math.max(finalFractionNumerator, finalFractionDenominator)
 					% Math.min(finalFractionNumerator, finalFractionDenominator);
 		}
+		// returns the minimum
 		return Math.min(finalFractionNumerator, finalFractionDenominator);
+		
 	}
-
 	/*-------------------------------------- Convert to mixed fractions method --------------------------------------
 	* this method is used to convert a simplified fraction which has a final numerator over final denominator into a mixed fraction
 	* a mixed number has this format 6_1/2 (6 is the first part = whole number)(1 is the second part = remainder)(2 is the third part = denominator) 
