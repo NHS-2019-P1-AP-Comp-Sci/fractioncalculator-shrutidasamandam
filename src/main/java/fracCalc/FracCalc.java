@@ -41,6 +41,12 @@ public class FracCalc {
 		// finding what the operator is, returns a part of the string which is the
 		// operator
 		String operator = input.substring(firstSpace + 1, lastSpace);
+		//System.out.println(operator);
+		// extra credit
+		if (operator.equals("+")||operator.equals("-")||operator.equals("*")||operator.equals("/")) {
+		} else {
+			return ("ERROR: Input is in an invalid format.");
+		}
 		/* ------------------------- Everything regarding the first fraction of user's input*/
 		// declaring the whole number in the first fraction
 		String wholeNumInFraction1;
@@ -140,7 +146,6 @@ public class FracCalc {
 			// denominator is 1
 			denominatorOfFraction2 = "1";
 		}
-
 		/* ------------------------- Simplifying the second fractions numerator and denominator -------------------------*/
 		// saying that the simplified numerator of fraction 1 is the value of its whole
 		// number of the first fraction times the value of its denominator plus the
@@ -160,7 +165,13 @@ public class FracCalc {
 			simplifiedNumeratorFraction2 = ((Math.abs(Integer.parseInt(wholeNumInFraction2))
 					* Integer.parseInt(denominatorOfFraction2)) + Integer.parseInt(numeratorOfFraction2)) * -1;
 		}
-		// denominator would be the same
+		// extra credit
+		if (simplifiedDenominatorFraction1 == 0) {
+			return ("ERROR: Cannot divide by zero.");
+		}
+		if (denominatorOfFraction2.equals("0")) {
+			return ("ERROR: Cannot divide by zero.");
+		}
 		int simplifiedDenominatorFraction2 = (Integer.parseInt(denominatorOfFraction2));
 		/*------------------------- Addition -------------------------*/
 		// is called when operation sign is found
